@@ -7,44 +7,35 @@ public class DuplicateStrings {
 
     public static void main(String[] arg) {
 
-        StringOperations operations=new StringOperations();
+        String word = "Shameless!";
 
-        String input="Shameless!";
+        System.out.println("Duplicate characters in: " + word);
 
-        System.out.println("Duplicate characters in: "+input);
+        int occurence[] = new int[word.length()];
+        List duplicates = new ArrayList<Character>();
 
-        operations.duplicateStrings(input.toCharArray());
+        for (int i = 0; i < word.length(); i++) {
 
-    }
-}
+            //every letter is present once by default
+            occurence[i] = 1;
 
-class StringOperations{
+            for (int j = 0; j < word.length() && i != j; j++) {
 
-    public void duplicateStrings(char[] word){
-
-        int counters[]= new int[word.length];
-
-        for(int i=0;i<word.length;i++){
-
-            counters[i]=1;
-
-            for(int j=0;j<word.length&&i!=j;j++){
-
-                if(word[i]==word[j]){
-                    counters[i]=counters[i]+1;
+                if (word.charAt(i) == word.charAt(j)) {
+                    //increase duplicate occurence
+                    occurence[i] = occurence[i] + 1;
                 }
             }
         }
 
-        List duplicates=new ArrayList<Character>();
-
-        for(int i=counters.length-1;i>=0;i--){
-            if(counters[i]>1&&!duplicates.contains(word[i])){
-                duplicates.add(word[i]);
-                System.out.println("The duplicate character "+word[i]+" appeared "+counters[i]+" times.");
+        for (int i = occurence.length - 1; i >= 0; i--) {
+            if (occurence[i] > 1 && !duplicates.contains(word.charAt(i))) {
+                duplicates.add(word.charAt(i));
+                System.out.println("The duplicate character " + word.charAt(i) + " appeared " + occurence[i] + " times.");
             }
         }
 
         duplicates.clear();
+        occurence=null;
     }
 }
