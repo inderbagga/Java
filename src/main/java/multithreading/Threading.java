@@ -1,5 +1,9 @@
 package multithreading;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
+import static java.lang.Thread.currentThread;
 import static java.lang.Thread.sleep;
 
 public class Threading {
@@ -11,14 +15,45 @@ public class Threading {
         DEF runnableDEF=new DEF();
         Thread threadDEF=new Thread(runnableDEF,"DEF");
 
-        System.out.println("threadABC.getState() -> "+ threadABC.getState());
+        System.out.println("abc -> "+ threadABC.getState());
 
         threadABC.start();
         threadDEF.start();
 
-        System.out.println("threadDEF.getState() -> "+ threadDEF.getState());
+        System.out.println("def -> "+ threadDEF.getState());
+
+        // creating an instance of timer class
+        Timer timer = new Timer();
+
+        // creating an instance of task to be scheduled
+        TimerTask logger = new Logger(threadABC,threadDEF,timer);
+        timer.scheduleAtFixedRate(logger,1000,1000);
+
     }
 }
+
+class Logger extends TimerTask{
+
+    ABC threadABC;
+    Thread threadDEF;
+    Timer timer;
+
+    public Logger(ABC threadABC, Thread threadDEF, Timer timer) {
+        this.threadABC=threadABC;
+        this.threadDEF=threadDEF;
+        this.timer=timer;
+    }
+
+    @Override
+    public void run() {
+
+        System.out.println("abc -> "+threadABC.getState()+ " and "+"def -> "+threadDEF.getState());
+
+        if(threadABC.getState()== Thread.State.TERMINATED&&threadDEF.getState()== Thread.State.TERMINATED)
+            timer.cancel();
+    }
+}
+
 
 class ABC extends Thread {
 
@@ -51,7 +86,7 @@ class DEF implements Runnable {
 
         for(int i=1;i<=100;i++){
 
-            if(i>25&&i<76)System.out.println(Thread.currentThread()+":"+i);
+            if(i>25&&i<76)System.out.println(currentThread()+":"+i);
             else {
                 try {
                     sleep(100);
