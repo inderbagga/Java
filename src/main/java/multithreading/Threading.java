@@ -1,5 +1,7 @@
 package multithreading;
 
+import static java.lang.Thread.sleep;
+
 public class Threading {
 
     public static void main(String[]args){
@@ -29,8 +31,15 @@ class ABC extends Thread {
     @Override
     public void run() {
 
-        for(int i=1;i<=5;i++){
-            System.out.println(Thread.currentThread()+":"+i);
+        for(int i=1;i<=100;i++){
+
+            if(i>25&&i<76) {
+                try {
+                    sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }else System.out.println(Thread.currentThread()+":"+i);
         }
     }
 }
@@ -40,8 +49,16 @@ class DEF implements Runnable {
     @Override
     public void run() {
 
-        for(int i=1;i<=5;i++){
-            System.out.println(Thread.currentThread()+":"+i);
+        for(int i=1;i<=100;i++){
+
+            if(i>25&&i<76)System.out.println(Thread.currentThread()+":"+i);
+            else {
+                try {
+                    sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
         }
 
     }
