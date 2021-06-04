@@ -7,7 +7,7 @@ public class DuplicateStrings {
 
     public static void main(String[] arg) {
 
-        String word = "Shameless!";
+        String word = "Great Responsibility!";
 
         System.out.println("Duplicate characters in: " + word);
 
@@ -19,7 +19,7 @@ public class DuplicateStrings {
             //every letter is present once by default
             occurence[i] = 1;
 
-            for (int j = 0; j < word.length() && i != j; j++) {
+            for (int j = 1; j < word.length() && i != j; j++) {
 
                 if (word.charAt(i) == word.charAt(j)) {
                     //increase duplicate occurence
