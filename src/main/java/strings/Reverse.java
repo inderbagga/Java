@@ -4,9 +4,28 @@ public class Reverse {
 
     public static void main(String[] args){
 
+        String adjective="Grateful";
+        String name="Inder Bagga";
+
         //using single loop
-        reverseInCamel("Grateful".toLowerCase());
-        reverseInCamel("Inder Bagga".toLowerCase());
+        reverseInCamel(adjective.toLowerCase());
+        reverseInCamel(name.toLowerCase());
+
+        //using byte[]
+        reverseInBytes(adjective);
+    }
+
+    private static void reverseInBytes(String adjective) {
+
+        byte[] inBytes=adjective.getBytes();
+        byte[] revBytes=new byte[inBytes.length];
+
+
+        for(int i=0;i<inBytes.length;i++){
+            revBytes[i]=inBytes[inBytes.length-1-i];
+        }
+
+        System.out.println(new String(revBytes));
     }
 
     private static void reverseInCamel(String input) {
