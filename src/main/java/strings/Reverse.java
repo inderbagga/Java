@@ -1,5 +1,10 @@
 package strings;
 
+import java.util.Collections;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.stream.Collectors;
+
 public class Reverse {
 
     public static void main(String[] args){
@@ -12,12 +17,39 @@ public class Reverse {
 
         reverseInBytes(adjective);
 
-        reverseByDefault(adjective);
+        System.out.println(new StringBuilder(adjective).reverse());
+        System.out.println(new StringBuffer(adjective).reverse());
+
+        reverseBySwap(adjective);
+
+        reverseByCollections(adjective);
     }
 
-    private static void reverseByDefault(String input) {
+    private static void reverseByCollections(String adjective) {
 
-        System.out.println(new StringBuilder().append(input).reverse());
+        List<Character> characterList= adjective.chars().mapToObj(c -> (char) c).collect(Collectors.toList());
+
+        Collections.reverse(characterList);
+
+        ListIterator<Character> iterator=characterList.listIterator();
+
+        while(iterator.hasNext())
+            System.out.print(iterator.next());
+
+    }
+
+    private static void reverseBySwap(String input) {
+
+        int left=0;
+        int right=input.length()-1;
+        char[] swap=input.toCharArray();
+
+        for(left=0;left<right;left++,right--){
+            swap[left]=swap[right];
+            swap[right]=input.charAt(left);
+        }
+
+        System.out.println(String.valueOf(swap));
     }
 
     private static void reverseInBytes(String adjective) {
