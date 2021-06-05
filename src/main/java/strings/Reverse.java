@@ -7,12 +7,17 @@ public class Reverse {
         String adjective="Grateful";
         String name="Inder Bagga";
 
-        //using single loop
         reverseInCamel(adjective.toLowerCase());
         reverseInCamel(name.toLowerCase());
 
-        //using byte[]
         reverseInBytes(adjective);
+
+        reverseByDefault(adjective);
+    }
+
+    private static void reverseByDefault(String input) {
+
+        System.out.println(new StringBuilder().append(input).reverse());
     }
 
     private static void reverseInBytes(String adjective) {
@@ -35,7 +40,6 @@ public class Reverse {
         for(int i=input.length()-1;i>=0;i--){
             output=output.concat(String.valueOf(input.charAt(i)));
         }
-
 
         if(input.contains(" ")){
 
