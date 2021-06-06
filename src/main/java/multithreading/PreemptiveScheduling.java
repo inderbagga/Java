@@ -18,6 +18,7 @@ public class PreemptiveScheduling {
 class P extends Thread {
 
     int id;
+    boolean isDaemon;
 
     P(int id){
         this.id=id;
@@ -26,15 +27,17 @@ class P extends Thread {
     @Override
     public void run() {
 
+        if(Thread.currentThread().isDaemon())isDaemon=true;
+
         switch (id){
 
             case 1: for(int i=1;i<6;i++){
-                System.out.println("p1->"+i);
+                System.out.println(isDaemon?"Daemon Thread p1->"+i:"User Thread p1->"+i);
             }
             break;
 
             case 2: for(int i=6;i<11;i++){
-                System.out.println("p2->"+i);
+                System.out.println(isDaemon?"Daemon Thread p2->"+i:"User Thread p2->"+i);
             }
             break;
 
