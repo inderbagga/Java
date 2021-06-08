@@ -10,7 +10,20 @@ public class JavaRuntime {
 
         //openLibreOffice(operatingSystem);//uncomment to open another application.*/
 
-        shutdown(operatingSystem,true);
+        //shutdown(operatingSystem,true);//uncomment to restart/shutdown OS.*/
+
+        displayProcessorAndMemoryInfo();
+
+    }
+
+    static private void displayProcessorAndMemoryInfo(){
+
+        Runtime runtime=Runtime.getRuntime();
+
+        System.out.println("Available Processors: "+runtime.availableProcessors());
+        System.out.println("Available Total Memory: "+runtime.totalMemory());
+        System.out.println("Available Free Memory: "+runtime.freeMemory());
+
     }
 
     static private void shutdown(String OS,boolean restart){
