@@ -10,17 +10,17 @@ public class JavaRuntime {
 
         //openLibreOffice(operatingSystem);//uncomment to open another application.*/
 
-        shutdown(operatingSystem);
+        shutdown(operatingSystem,true);
     }
 
-    static private void shutdown(String OS){
+    static private void shutdown(String OS,boolean restart){
 
         Runtime runtime=Runtime.getRuntime();
 
         try {
 
             if(OS.equals("Linux")){
-                Process proc =runtime.exec("shutdown -h -t 0");
+                Process proc =runtime.exec(restart?"shutdown -r -t 0":"shutdown -h -t 0");
                 System.exit(0);
             }
 
