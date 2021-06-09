@@ -1,4 +1,4 @@
-package multithreading;
+package multithreading.synchronization;
 
 public class DeadLock {
 

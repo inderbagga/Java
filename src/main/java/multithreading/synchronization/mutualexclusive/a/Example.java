@@ -1,4 +1,4 @@
-package multithreading.synchronization.a;
+package multithreading.synchronization.mutualexclusive.a;
 
 import static java.lang.Thread.currentThread;
 
